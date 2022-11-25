@@ -8,10 +8,6 @@ module.exports = {
     host: process.env.DB_HOSTNAME ?? "127.0.0.1",
     port: process.env.DB_PORT ?? 5432,
     dialect: process.env.DB_DIALECT,
-    dialectOptions: {
-      ssl: true,
-      rejectUnauthorized: false,
-    },
   },
   production: {
     use_env_variable: "DATABASE_URL",
@@ -21,9 +17,5 @@ module.exports = {
     host: process.env.DB_HOSTNAME ?? "127.0.0.1",
     port: process.env.DB_PORT ?? 5432,
     dialect: process.env.DB_DIALECT,
-    dialectOptions: {
-      ssl: true,
-      rejectUnauthorized: false,
-    },
   },
 };
