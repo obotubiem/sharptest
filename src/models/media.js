@@ -21,14 +21,20 @@ module.exports = (sequelize, DataTypes) => {
       smallUrl: {
         type: DataTypes.VIRTUAL,
         get() {
-          if (this.small) return `${process.env.PROTOCOL}://${process.env.HOST}:${process.env.PORT}/uploads/${this.small}`;
+          if (this.small) {
+            const protocol = process.env.PROTOCOL ?? "http";
+            return `${protocol}://${process.env.HOST}:${process.env.PORT}/uploads/${this.small}`;
+          }
           return null;
         },
       },
       largeUrl: {
         type: DataTypes.VIRTUAL,
         get() {
-          if (this.large) return `${process.env.PROTOCOL}://${process.env.HOST}:${process.env.PORT}/uploads/${this.large}`;
+          if (this.large) {
+            const protocol = process.env.PROTOCOL ?? "http";
+            return `${protocol}://${process.env.HOST}:${process.env.PORT}/uploads/${this.large}`;
+          }
           return null;
         },
       },
