@@ -8,8 +8,9 @@ const env = process.env.NODE_ENV ?? "development";
 const config = require("../config/config");
 const db = {};
 console.log(config);
+console.log(env);
+console.log(config[env]);
 console.log('itu bukan confignya');
-console.log(path.resolve(__dirname, "../", "config/config.js"));
 const sequelize = new Sequelize(config.database, config.username, config.password, config);
 
 fs.readdirSync(__dirname)
