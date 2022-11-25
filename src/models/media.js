@@ -22,8 +22,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.VIRTUAL,
         get() {
           if (this.small) {
-            const protocol = process.env.PROTOCOL ?? "http";
-            return `${protocol}://${process.env.HOST}:${process.env.PORT}/uploads/${this.small}`;
+            const domainUrl = process.env.DOMAIN_URL;
+            return `${domainUrl}/uploads/${this.small}`;
           }
           return null;
         },
@@ -32,8 +32,8 @@ module.exports = (sequelize, DataTypes) => {
         type: DataTypes.VIRTUAL,
         get() {
           if (this.large) {
-            const protocol = process.env.PROTOCOL ?? "http";
-            return `${protocol}://${process.env.HOST}:${process.env.PORT}/uploads/${this.large}`;
+            const domainUrl = process.env.DOMAIN_URL;
+            return `${domainUrl}/uploads/${this.large}`;
           }
           return null;
         },
