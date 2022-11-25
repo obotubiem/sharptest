@@ -1,41 +1,39 @@
-const { User } = require('../models')
+const { User } = require("../models");
 
 class userRepository {
-    constructor() {
-        this.UserModel = User;
-    }
+  constructor() {
+    this.UserModel = User;
+  }
 
-    async getAllUser(filter) {
-        const result = await this.UserModel.findAll(filter)
-        return result
-    }
+  async getAllUser(options) {
+    const result = await this.UserModel.findAll(options);
+    return result;
+  }
 
-    async getUserById(id) {
-        const result = await this.UserModel.findOne({
-            where: { id }
-        })
-        return result
-    }
+  async getUserById(id, options) {
+    const result = await this.UserModel.findByPk(id, options);
+    return result;
+  }
 
-    async createUser(data) {
-        const result = await this.UserModel.create(data)
-        return result
-    }
-    
-    async updateUser(data, id) {
-        const result = await this.UserModel.update(data, {
-            where : { id }
-        })
+  async createUser(data) {
+    const result = await this.UserModel.create(data);
+    return result;
+  }
 
-        return result
-    }
+  async updateUser(data, id) {
+    const result = await this.UserModel.update(data, {
+      where: { id },
+    });
 
-    async deleteUser(id) {
-        const result = await this.UserModel.destroy({
-            where: { id }
-        })
-        return result
-    }
+    return result;
+  }
+
+  async deleteUser(id) {
+    const result = await this.UserModel.destroy({
+      where: { id },
+    });
+    return result;
+  }
 }
 
-module.exports = userRepository
+module.exports = userRepository;
