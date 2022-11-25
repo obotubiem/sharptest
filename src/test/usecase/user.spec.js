@@ -66,4 +66,34 @@ describe("USER TEST", () => {
             expect(res.data).toEqual(null)
          })
     })
+
+    describe("Create User", () => {
+        test("should isSuccess = true statusCode = 200, and type data is Object ", async  () => { 
+            let res = await userUC.createUser()
+
+            expect(res.isSuccess).toBeTruthy();
+            expect(res.statusCode).toEqual(200);
+            expect(res.data).toHaveProperty("nama");
+            expect(res.data).toHaveProperty("asal_Kota");
+            expect(res.data).toHaveProperty("no_Whatsapp");
+            expect(res.data).toHaveProperty("pendidikan_terakhir");
+            expect(res.data).toHaveProperty("tanggal_lahir");
+            expect(res.data).toHaveProperty("url_foto");
+         })
+    })
+
+    describe("Update User", () => {
+        test("should isSuccess = true statusCode = 200, and type data is Object ", async  () => { 
+            let res = await userUC.updateUser({nama: "customerUpdate"})
+
+            expect(res.isSuccess).toBeTruthy();
+            expect(res.statusCode).toEqual(200);
+            expect(res.data).toHaveProperty("nama");
+            expect(res.data).toHaveProperty("asal_Kota");
+            expect(res.data).toHaveProperty("no_Whatsapp");
+            expect(res.data).toHaveProperty("pendidikan_terakhir");
+            expect(res.data).toHaveProperty("tanggal_lahir");
+            expect(res.data).toHaveProperty("url_foto");
+         })
+    })
 })

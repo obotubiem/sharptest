@@ -1,23 +1,32 @@
-const express = require('express');
+const express = require("express");
 
 const app = express();
-const cors = require('cors')
-const serverError = require('./middlerware/serverError');
+const cors = require("cors");
+const morgan = require("morgan")
+const serverError = require("./middlerware/serverError");
+
+const userRouter = require("../src/routes/user");
+
+const userRepository = require("../src/repository/user");
+const userUseCase = require("../src/usecase/user");
+
+const userUC = new userUseCase(new userRepository());
+
+app.use((req, res, next) => {
+  req.userUC = userUC;
+  next();
+});
+
 app.use(cors());
 app.use(express.json());
+app.use(morgan("combined"))
 app.use(express.urlencoded({ extended: false }));
 
-app.get('/', (req, res)=> {
-    res.json('hello')
-})
+app.get("/", (req, res) => {
+  res.json("welcome to mobilkita.com");
+});
 
-
-
-
-
-
-
-
+app.use("/api/v1", userRouter);
 
 app.use(serverError);
 module.exports = app;
