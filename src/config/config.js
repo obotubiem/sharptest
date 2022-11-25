@@ -9,7 +9,6 @@ module.exports = {
     port: process.env.DB_PORT ?? 5432,
     dialect: process.env.DB_DIALECT,
     dialectOptions: {
-      ssl: true,
       rejectUnauthorized: false,
     },
   },
@@ -22,7 +21,6 @@ module.exports = {
     port: process.env.DB_PORT ?? 5432,
     dialect: process.env.DB_DIALECT,
     dialectOptions: {
-      ssl: true,
       rejectUnauthorized: false,
     },
   },
