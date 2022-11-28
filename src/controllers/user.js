@@ -49,7 +49,7 @@ module.exports = {
           user.setDataValue("image2", user.photo.largeUrl);
         }
 
-        return user
+        return user;
       });
 
       if (!response.isSuccess) {
@@ -124,7 +124,7 @@ module.exports = {
         user.setDataValue("image2", user.photo.largeUrl);
       }
 
-      res.status(200).json(user);
+      res.status(response.statusCode).json(user);
     } catch (e) {
       next(e);
     }
