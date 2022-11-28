@@ -21,6 +21,10 @@ module.exports = {
       const response = await req.userUC.getUserById(id);
       const user = response.data;
 
+      if (!response.isSuccess) {
+        return res.status(user.statusCode).json(resData.failed(response.reason));
+      }
+
       if (user.city) {
         user.setDataValue("city", user.city.name);
       }
@@ -30,7 +34,7 @@ module.exports = {
         user.setDataValue("image2", user.photo.largeUrl);
       }
 
-      res.status(200).json(user);
+      res.status(response.statusCode).json(resData.success(user));
     } catch (e) {
       next(e);
     }
@@ -124,7 +128,7 @@ module.exports = {
         user.setDataValue("image2", user.photo.largeUrl);
       }
 
-      res.status(response.statusCode).json(user);
+      res.status(response.statusCode).json(resData.success(user));
     } catch (e) {
       next(e);
     }
