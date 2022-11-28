@@ -22,7 +22,7 @@ module.exports = {
       const user = response.data;
 
       if (!response.isSuccess) {
-        return res.status(user.statusCode).json(resData.failed(response.reason));
+        return res.status(response.statusCode).json(resData.failed(response.reason));
       }
 
       if (user.city) {
@@ -30,8 +30,8 @@ module.exports = {
       }
 
       if (user.photo) {
-        user.setDataValue("image1", user.photo.smallUrl);
-        user.setDataValue("image2", user.photo.largeUrl);
+        user.setDataValue("image1", encodeURIComponent(user.photo.smallUrl));
+        user.setDataValue("image2", encodeURIComponent(user.photo.largeUrl));
       }
 
       res.status(response.statusCode).json(resData.success(user));
@@ -49,8 +49,8 @@ module.exports = {
         }
 
         if (user.photo) {
-          user.setDataValue("image1", user.photo.smallUrl);
-          user.setDataValue("image2", user.photo.largeUrl);
+          user.setDataValue("image1", encodeURIComponent(user.photo.smallUrl));
+          user.setDataValue("image2", encodeURIComponent(user.photo.largeUrl));
         }
 
         return user;
@@ -124,8 +124,8 @@ module.exports = {
       }
 
       if (user.photo) {
-        user.setDataValue("image1", user.photo.smallUrl);
-        user.setDataValue("image2", user.photo.largeUrl);
+        user.setDataValue("image1", encodeURIComponent(user.photo.smallUrl));
+        user.setDataValue("image2", encodeURIComponent(user.photo.largeUrl));
       }
 
       res.status(response.statusCode).json(resData.success(user));
