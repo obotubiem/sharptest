@@ -2,14 +2,35 @@ const resData = require("../helpers/response");
 const helper = require("../helpers");
 
 module.exports = {
+  // getUserById: async (req, res, next) => {
+  //   try {
+  //     let { id } = req.params;
+  //     let user = await req.userUC.getUserById(id);
+  //     if (!user.isSuccess) {
+  //       return res.status(user.statusCode).json(resData.failed(user.reason));
+  //     }
+  //     res.status(user.statusCode).json(resData.success(user.data));
+  //   } catch (e) {
+  //     next(e);
+  //   }
+  // },
+
   getUserById: async (req, res, next) => {
     try {
-      let { id } = req.params;
-      let user = await req.userUC.getUserById(id);
-      if (!user.isSuccess) {
-        return res.status(user.statusCode).json(resData.failed(user.reason));
+      const { id } = req.params;
+      const response = await req.userUC.getUserById(id);
+      const user = response.data;
+
+      if (user.city) {
+        user.setDataValue("city", user.city.name);
       }
-      res.status(user.statusCode).json(resData.success(user.data));
+
+      if (user.photo) {
+        user.setDataValue("image1", user.photo.smallUrl);
+        user.setDataValue("image2", user.photo.largeUrl);
+      }
+
+      res.status(200).json(user);
     } catch (e) {
       next(e);
     }
@@ -70,6 +91,27 @@ module.exports = {
       }
 
       res.status(user.statusCode).json(resData.success(user.data));
+    } catch (e) {
+      next(e);
+    }
+  },
+
+  getUserByIdTesting: async (req, res, next) => {
+    try {
+      const { id } = req.params;
+      const response = await req.userUC.getUserById(id);
+      const user = response.data;
+
+      if (user.city) {
+        user.setDataValue("city", user.city.name);
+      }
+
+      if (user.photo) {
+        user.setDataValue("image1", user.photo.smallUrl);
+        user.setDataValue("image2", user.photo.largeUrl);
+      }
+
+      res.status(200).json(user);
     } catch (e) {
       next(e);
     }
