@@ -19,13 +19,12 @@ class mediaUseCase {
     const metadata = await sharp(file.path).metadata();
     const fileType = metadata.format;
 
-    const randomString1 = (Math.random() * (100000 - 1) + 1).toString(36).substring(7);
-    const randomString2 = (Math.random() * (100000 - 1) + 1).toString(36).substring(7);
+    const randomString = (Math.random() * (100000 - 1) + 1).toString(36).substring(7);
 
-    const smallFileName = randomString1 + "." + fileType;
+    const smallFileName = randomString + "_small." + fileType;
     const smallDestinationPath = path.resolve(file.destination, "", smallFileName);
 
-    const largeFileName = randomString2 + "." + fileType;
+    const largeFileName = randomString + "_large." + fileType;
     const largeDestinationPath = path.resolve(file.destination, "", largeFileName);
 
     await sharp(file.path).resize(500).jpeg({ quality: 90 }).toFile(smallDestinationPath);
